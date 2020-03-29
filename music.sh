@@ -4,12 +4,16 @@
 
 if [ $(mpc current | wc -l) -gt 0 ]
 then
-	chosen=$(printf "current info\\nnext\\npause\\nplay\\nprev\\n" | dmenu -i -p "mympc:") &&
+	chosen=$(printf "current info\\nnext\\npause/play\\nprev\\nstop" | dmenu -i -p "mympc:") &&
 	case "$chosen" in
-		"current info") $(echo mpc);;
-		"next") mpc next;;
-		"pause") mpc pause;;
-		"play") mpc play;;
-		"prev") mpc prev;;
+		"current info") current=$(echo `mpc -f "%title%"`);notify-send "currently: ${current}";;
+		"pause/play") mpc toggle;;
+		*) mpc "$chosen";;
+	esac
+else
+	chosen=$(printf "show playlists" | dmenu -i -p "mympc:")&&
+	case "$chosen" in
+		"show playlists") playlist=$(echo $(mpc lsplaylists) | dmenu -i -p "choose playlist to load")&&
+			mpc load $playlist > /dev/null;mpc play > /dev/null;
 	esac
 fi
