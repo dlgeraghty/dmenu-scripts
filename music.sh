@@ -3,7 +3,8 @@
 # in a first version, it will only display the controls / info if there is a current song playing :)
 
 showplaylist(){
-	selected=$(mpc playlist | dmenu -l $(mpc playlist | wc -l))&&
+	n_tracks=$(mpc playlist $playlist | wc -l);
+	selected=$(mpc playlist $playlist| dmenu -l $n_tracks -p "results: ${n_tracks}")&&
 		action=$(printf "play\\nremove from playlist" | dmenu -p "$selected");
 }
 
