@@ -23,12 +23,14 @@ queue(){
 
 if [ $(mpc current | wc -l) -gt 0 ]
 then
-	chosen=$(printf "current info\\nnext\\npause/play\\nprev\\nstop\\nqueue" | dmenu -i -p "mympc:") &&
+	chosen=$(printf "\\n怜\\n懶\\n玲\\n\\n蘿" | dmenu -i -fn "Iosevka Nerd Font:size=20" -p "mympc:") &&
 	case "$chosen" in
-		"current info") current=$(echo `mpc -f "%title%"`);notify-send "currently: ${current}";;
-		"pause/play") mpc toggle;;
-		"queue") queue ;;
-		*) mpc "$chosen";;
+		"") current=$(echo `mpc -f "%title%"`);notify-send "currently: ${current}";;
+		"懶") mpc toggle;;
+		"蘿") queue ;;
+		"") mpc stop ;;
+		"怜") mpc next ;;
+		"玲") mpc prev ;;
 	esac
 else
 	chosen=$(printf "show playlists\\nnew playlist" | dmenu -i -p "mympc:")&&
