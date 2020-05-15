@@ -3,4 +3,4 @@ xrandr --addmode LVDS-1 "1920x1080_30.00"
 xrandr --output LVDS-1 --mode "1920x1080_30.00"
 i3-msg restart
 setbg ~/Downloads/bg.jpg
-ffmpeg -f x11grab -video_size 1920x1080 -framerate 30 -i $DISPLAY -f alsa -i default -c:v libx264 -preset ultrafast -c:a aac screen.mp4
+ffmpeg -f x11grab -video_size 1920x1080 -framerate 30 -i $DISPLAY -f alsa -i default -c:v libx264 -preset ultrafast -c:a aac $1
