@@ -1,0 +1,10 @@
+
+file=$(readlink -f "$1")
+base="${file%.*}"
+dir=$(dirname "$file")
+
+cd "$dir" &&
+
+case "$file" in 
+	*.c) gcc -g -Wall "$file" -o "$base" 
+esac
